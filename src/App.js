@@ -1,23 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
+  // Store the random number
+  const [randomNumber, setRandomNumber] = useState(null);
+
+  // Generate random number between 1 and 100
+  const generateNumber = () => {
+    const number = Math.floor(Math.random() * 100) + 1;
+
+    setRandomNumber(number);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+    <div className="container">
+      <div className="generator-card">
+        <h1>Random Number Generator</h1>
+
+        <p className="description">
+          Generate a random number between 1 and 100
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        <div className="number-display">
+          {randomNumber === null ? (
+            <p className="placeholder">
+              No number generated yet
+            </p>
+          ) : (
+            <h2>{randomNumber}</h2>
+          )}
+        </div>
+
+        <button
+          className="generate-btn"
+          onClick={generateNumber}
         >
-          Learn React
-        </a>
-      </header>
+          Generate Random Number
+        </button>
+
+        {/* Conditional Rendering */}
+        {randomNumber !== null && (
+          <p className="success-message">
+            Random number generated successfully!
+          </p>
+        )}
+      </div>
     </div>
   );
 }
